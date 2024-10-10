@@ -1,5 +1,6 @@
 <template>
-  <h1 class="text-3xl">HelloWorld</h1>
+  <h1 class="font-bold ">HelloWorldww</h1>
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
