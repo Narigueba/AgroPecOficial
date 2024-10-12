@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-green-400">
-    <header class="absolute inset-x-0 top-0 z-50">
-      <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div class="flex lg:flex-1">
-          <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Agropec</span>
-            <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+  <div class="bg-green-400 h-20">
+    <header class="fixed inset-x-0 top-2 z-50">
+      <nav class="flex items-center justify-between p-5 lg:px-5" aria-label="Global">
+        <div class="flex lg:flex-1.8">
+          <a href="#" class="-m-2 p-2">
+            <span class="sr-only">AgroPec</span>
+            <h7 class="fixed inset-x-3 top-2 font-medium size top-3 z-0">AgroPec</h7> 
           </a>
         </div>
         <div class="flex lg:hidden">
@@ -18,7 +18,7 @@
           <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-sm font-semibold leading-6 text-gray-900">{{ item.name }}</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" class="text-sm font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
+          <button href="#" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Login <span aria-hidden="true">&rarr;</span></button>
         </div>
       </nav>
       <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -26,7 +26,7 @@
         <DialogPanel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div class="flex items-center justify-between">
             <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">Your Company</span>
+              <span class="sr-only">AgroPec</span>
               <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="" />
             </a>
             <button type="button" class="-m-2.5 rounded-md p-2.5 text-white" @click="mobileMenuOpen = false">
@@ -40,7 +40,7 @@
                 <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50">{{ item.name }}</a>
               </div>
               <div class="py-6">
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
+                <button href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</button>
               </div>
             </div>
           </div>
@@ -54,16 +54,13 @@
       </div>
       <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-          <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-white ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-            Announcing our next round of funding. <a href="#" class="font-semibold text-indigo-600"><span class="absolute inset-0" aria-hidden="true" />Read more <span aria-hidden="true">&rarr;</span></a>
-          </div>
         </div>
         <div class="text-center">
-          <h1 class="text-balance text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Agropec</h1>
-          <p class="mt-6 text-lg leading-8 text-gray-600">O inicio de tudo.</p>
+          <h1 class="text-balance text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">AgroPec</h1>
+          <p class="mt-6 text-lg leading-8 text-gray-800">O inicio de tudo.</p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Iniciar</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Saiba mais <span aria-hidden="true">→</span></a>
+            <a href="#" class="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Login</a>
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Cadastrar <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -80,10 +77,10 @@ import { Dialog, DialogPanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Home', href: '#' },
+  { name: 'Cavalos', href: '#' },
+  { name: 'Calendário', href: '#' },
+  { name: 'Mais', href: '#' },
 ]
 
 const mobileMenuOpen = ref(false)
