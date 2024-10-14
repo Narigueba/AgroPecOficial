@@ -18,10 +18,10 @@
         v-bind:key="obj.id"
         class="todos-item"
         >
-            <h6>{{ obj.title}}</h6>
-            <h6>{{ obj.id}}</h6>
-            <h6>{{ obj.userId}}</h6>
-            <h6>{{ obj.completed}}</h6>
+            <h6>{{ obj.title }}</h6>
+            <h6>{{ obj.id }}</h6>
+            <h6>{{ obj.userId }}</h6>
+            <h6>{{ obj.completed }}</h6>
         </div>
     </div>
 </template>
@@ -133,7 +133,7 @@
         font-size: 4rem;
     }
     .todos-item{
-        background-color: white;
+        background-color: rgb(218, 16, 16);
         margin-top: 1rem;
         padding: 0.4rem 4rem;
         border-radius: 50px;
