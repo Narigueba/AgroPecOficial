@@ -17,7 +17,7 @@ namespace AgroPec.Controllers
         }
 
         [HttpGet]
-        [Route("consultarRaçãoPorId")]
+        [Route("consultarRacaoPorId")]
         public async Task<IActionResult> ConsultarPorId([FromQuery] int id)
         {
             var racao = new Racao();
@@ -55,7 +55,7 @@ namespace AgroPec.Controllers
         }
 
         [HttpGet]
-        [Route("selecionarRações")]
+        [Route("selecionarRacoes")]
         public async Task<IActionResult> Selecionar()
         {
             var racoes = new List<Racao>();
@@ -93,7 +93,7 @@ namespace AgroPec.Controllers
         }
 
         [HttpPost]
-        [Route("inserirRações")]
+        [Route("inserirRacao")]
         public async Task<IActionResult> Inserir([FromBody] Racao racao)
         {
             try
@@ -103,9 +103,11 @@ namespace AgroPec.Controllers
 
                 command.CommandText = $"INSERT INTO Racao (NomeRacao, Peso, UnidadeMedida) VALUES ('{racao.NomeRacao}', {racao.Peso}, '{racao.UnidadeMedida}')";
 
-                command.ExecuteScalar();
+                command.ExecuteNonQueryAsync();
 
-                return Ok("Ração Inserida com Sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Ração Inserida com Sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -114,8 +116,8 @@ namespace AgroPec.Controllers
         }
 
         [HttpPut]
-        [Route("atualizarRação")]
-        public async Task<IActionResult> Atualizar([FromBody] Racao racao)
+        [Route("atualizarRacao")]
+        public async Task<IActionResult> Atualizar([FromQuery] int id, [FromBody] Racao racao)
         {
             try
             {
@@ -123,23 +125,27 @@ namespace AgroPec.Controllers
 
                 var command = _context.CreateCommand();
                 command.CommandText = "UPDATE Racao SET NomeRacao = @NomeRacao, Peso = @Peso, UnidadeMedida = @UnidadeMedida WHERE IdRacao = @IdRacao";
-                command.Parameters.AddWithValue("@IdRacao", racao.IdRacao);
+                command.Parameters.AddWithValue("@IdRacao", id);
                 command.Parameters.AddWithValue("@NomeRacao", racao.NomeRacao);
                 command.Parameters.AddWithValue("@Peso", racao.Peso);
                 command.Parameters.AddWithValue("@UnidadeMedida", racao.UnidadeMedida);
 
                 command.ExecuteNonQuery();
 
-                return Ok("Ração atualizada com Sucesso!!!");
+                return Ok( new { message = "Ração atualizada com Sucesso!!!" });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+            finally
+            {
+                _context.CloseConnection();
+            }
         }
 
         [HttpDelete]
-        [Route("deletarRação")]
+        [Route("deletarRacao")]
         public async Task<IActionResult> Deletar([FromQuery] int id)
         {
             try
@@ -152,7 +158,9 @@ namespace AgroPec.Controllers
 
                 command.ExecuteNonQuery();
 
-                return Ok("Ração deletada com Sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Ração Deletada com Sucesso!!!" });
             }
             catch (Exception ex)
             {
