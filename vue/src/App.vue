@@ -5,7 +5,7 @@
     <nav>
       <RouterLink to="/">Go to Home</RouterLink>
       <RouterLink to="/about">Go to About</RouterLink>
-      <RouterLink to="/novarota">Nova Rota</RouterLink>
+      <RouterLink to="/racao">Ração</RouterLink>
     </nav>
     <main>
       <RouterView />

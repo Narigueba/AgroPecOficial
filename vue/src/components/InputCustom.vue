@@ -16,16 +16,19 @@
   import { defineProps, defineEmits } from 'vue'
   
   const props = defineProps({
-    modelValue: String,
+    modelValue: {
+      type: [String, Number], // Aceita tanto String quanto Number
+      required: true,
+  },
     label: String,
     placeholder: String,
     id: String,
     type: {
       type: String,
       default: 'text',
-    },
-    inputClass: String
-  })
+  },
+    inputClass: String,
+});
   
   const emit = defineEmits(['update:modelValue'])
   </script>

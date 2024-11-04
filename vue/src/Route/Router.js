@@ -2,12 +2,12 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 
 import HomeView from '../Pages/HomeView.vue'
 import AboutView from '../Pages/AboutView/AboutView.vue'
-import NovaRota from '../Pages/NovaRota/NovaRota.vue'
+import Racao from '../Pages/Racao/Racao.vue'
 
 const routes = [
   { path: '/', component: HomeView },
   { path: '/about', component: AboutView },
-  { path: '/novarota', component: NovaRota },
+  { path: '/racao', component: Racao },
 ]
 
 const router = createRouter({
