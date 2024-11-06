@@ -103,7 +103,9 @@ namespace AgroPec.Controllers
 
                 command.ExecuteScalar();
 
-                return Ok("Vacina inserida com sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Vacina inserida com sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -113,7 +115,7 @@ namespace AgroPec.Controllers
 
         [HttpPut]
         [Route("atualizarVacina")]
-        public async Task<IActionResult> Atualizar([FromBody] Vacina vacina)
+        public async Task<IActionResult> Atualizar([FromQuery] int id, [FromBody] Vacina vacina)
         {
             try
             {
@@ -121,12 +123,14 @@ namespace AgroPec.Controllers
 
                 var command = _context.CreateCommand();
                 command.CommandText = "UPDATE vacina SET TipoVacina = @TipoVacina WHERE IdVacina = @IdVacina";
-                command.Parameters.AddWithValue("@IdVacina", vacina.IdVacina);
+                command.Parameters.AddWithValue("@IdVacina", id);
                 command.Parameters.AddWithValue("@TipoVacina", vacina.TipoVacina);
 
                 command.ExecuteNonQuery();
 
-                return Ok("Vacina atualizada com Sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Vacina atualizada com Sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -148,7 +152,9 @@ namespace AgroPec.Controllers
 
                 command.ExecuteNonQuery();
 
-                return Ok("Vacina excluida com sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Vacina excluida com sucesso!!!" });
             }
             catch (Exception ex)
             {

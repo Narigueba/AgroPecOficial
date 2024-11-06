@@ -105,7 +105,9 @@ namespace AgroPec.Controllers
 
                 command.ExecuteScalar();
 
-                return Ok("Tipo de Animal inserido com sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Tipo de Animal inserido com sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -115,7 +117,7 @@ namespace AgroPec.Controllers
 
         [HttpPut]
         [Route("atualizarTipoAnimal")]
-        public async Task<IActionResult> Atualizar([FromBody] TipoAnimal tipoAnimal)
+        public async Task<IActionResult> Atualizar([FromQuery] int id, [FromBody] TipoAnimal tipoAnimal)
         {
             try
             {
@@ -123,13 +125,15 @@ namespace AgroPec.Controllers
 
                 var command = _context.CreateCommand();
                 command.CommandText = "UPDATE tipoanimal SET Animal = @Animal, Especie = @Especie WHERE IdTipoAnimal = @IdTipoAnimal";
-                command.Parameters.AddWithValue("@IdTipoAnimal", tipoAnimal.IdTipoAnimal);
+                command.Parameters.AddWithValue("@IdTipoAnimal", id);
                 command.Parameters.AddWithValue("@Animal", tipoAnimal.Animal);
                 command.Parameters.AddWithValue("@Especie", tipoAnimal.Especie);
 
                 command.ExecuteNonQuery();
 
-                return Ok("Tipo de animal atualizad0 com Sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Tipo de animal atualizad0 com Sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -138,7 +142,7 @@ namespace AgroPec.Controllers
         }
 
         [HttpDelete]
-        [Route("deletarAnimal")]
+        [Route("deletarTipoAnimal")]
         public async Task<IActionResult> Deletar([FromQuery] int id)
         {
             try
@@ -151,7 +155,9 @@ namespace AgroPec.Controllers
 
                 command.ExecuteNonQuery();
 
-                return Ok("Tipo de animal excluido com sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Tipo de animal excluido com sucesso!!!" });
             }
             catch (Exception ex)
             {
