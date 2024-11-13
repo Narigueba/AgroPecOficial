@@ -10,7 +10,7 @@
         public string Cor { get; set; }
         public int Ninhada { get; set; }
         public decimal Peso { get; set; }
-        public string Fotos { get; set; }
+        public string? Fotos { get; set; }
         public string Raca { get; set; }
 
         //chaves estrangeiras

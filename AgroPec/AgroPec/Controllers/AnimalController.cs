@@ -192,13 +192,15 @@ namespace AgroPec.Controllers
                 command.Parameters.AddWithValue("@Ninhada", animal.Ninhada);
                 command.Parameters.AddWithValue("@Peso", animal.Peso);
                 command.Parameters.AddWithValue("@Fotos", animal.Fotos);
-                command.Parameters.AddWithValue("@IdRacao", animal.IdRacao);
-                command.Parameters.AddWithValue("@IdTipoAnimal", animal.IdTipoAnimal);
+                command.Parameters.AddWithValue("@IdRacao", animal.Racao.IdRacao);
+                command.Parameters.AddWithValue("@IdTipoAnimal", animal.TipoAnimal.IdTipoAnimal);
                 command.Parameters.AddWithValue("@Raca", animal.Raca);
 
                 command.ExecuteScalar();
 
-                return Ok("Animal inserido com sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Animal inserido com sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -208,7 +210,7 @@ namespace AgroPec.Controllers
 
         [HttpPut]
         [Route("atualizarAnimal")]
-        public async Task<IActionResult> Atualizar([FromBody] Animal animal)
+        public async Task<IActionResult> Atualizar([FromQuery] int id, [FromBody] Animal animal)
         {
             try
             {
@@ -218,7 +220,7 @@ namespace AgroPec.Controllers
                 command.CommandText = "UPDATE Animal SET NomeAnimal = @NomeAnimal, Idade = @Idade, DataNascimento = @DataNascimento, " +
                               "Sexo = @Sexo, Cor = @Cor, Ninhada = @Ninhada, Peso = @Peso, Fotos = @Fotos, " +
                               "IdRacao = @IdRacao, IdTipoAnimal = @IdTipoAnimal, Raca = @Raca WHERE IdAnimal = @IdAnimal";
-                command.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
+                command.Parameters.AddWithValue("@IdAnimal", id);
                 command.Parameters.AddWithValue("@NomeAnimal", animal.NomeAnimal);
                 command.Parameters.AddWithValue("@Idade", animal.Idade);
                 command.Parameters.AddWithValue("@DataNascimento", animal.DataNascimento);
@@ -227,13 +229,15 @@ namespace AgroPec.Controllers
                 command.Parameters.AddWithValue("@Ninhada", animal.Ninhada);
                 command.Parameters.AddWithValue("@Peso", animal.Peso);
                 command.Parameters.AddWithValue("@Fotos", animal.Fotos);
-                command.Parameters.AddWithValue("@IdRacao", animal.IdRacao);
-                command.Parameters.AddWithValue("@IdTipoAnimal", animal.IdTipoAnimal);
+                command.Parameters.AddWithValue("@IdRacao", animal.Racao.IdRacao);
+                command.Parameters.AddWithValue("@IdTipoAnimal", animal.TipoAnimal.IdTipoAnimal);
                 command.Parameters.AddWithValue("@Raca", animal.Raca);
 
                 command.ExecuteNonQuery();
 
-                return Ok("Animal atualizado com sucesso!!!");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Animal atualizado com sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -256,7 +260,9 @@ namespace AgroPec.Controllers
 
                 command.ExecuteNonQuery();
 
-                return Ok("Animal deletado com sucesso");
+                _context.CloseConnection();
+
+                return Ok(new { message = "Animal deletado com sucesso!" });
             }
             catch (Exception ex)
             {
