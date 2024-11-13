@@ -1,27 +1,12 @@
 export default class ApiService {
-    constructor(baseUrl = 'https://localhost:7001/Racao', baseUrlTipoAnimal = 'https://localhost:7001/TipoAnimal') {
+    constructor(baseUrl = 'https://localhost:7001/Vacina') {
         this.baseUrl = baseUrl;
-        this.baseUrlTipoAnimal = baseUrlTipoAnimal;
     }
-
-    async getTipoAnimal(selecionarTipoAnimal) {
-        try {
-            const response = await fetch(`${this.baseUrlTipoAnimal}/${selecionarTipoAnimal}`);
-            if (!response.ok) {
-                throw new Error(`Erro: ${response.statusText}`);
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Erro ao fazer GET:', error);
-            throw error;
-        }
-    }
-
 
     // Método GET para buscar dados
-    async get(selecionarRacoes) {
+    async get(selecionarVacinas) {
         try {
-            const response = await fetch(`${this.baseUrl}/${selecionarRacoes}`);
+            const response = await fetch(`${this.baseUrl}/${selecionarVacinas}`);
             if (!response.ok) {
                 throw new Error(`Erro: ${response.statusText}`);
             }
@@ -33,9 +18,9 @@ export default class ApiService {
     }
 
     // Método GET para buscar dados pelo id
-    async getById(consultarRacaoPorId, id) {
+    async getById(consultarVacinasPorId, id) {
         try {
-            const response = await fetch(`${this.baseUrl}/${consultarRacaoPorId}?id=${id}`);
+            const response = await fetch(`${this.baseUrl}/${consultarVacinasPorId}?id=${id}`);
             if (!response.ok) {
                 throw new Error(`Erro: ${response.statusText}`);
             }
@@ -47,9 +32,9 @@ export default class ApiService {
     }
 
     // Método POST para enviar dados
-    async post(inserirRacao, data) {
+    async post(inserirVacina, data) {
         try {
-            const response = await fetch(`${this.baseUrl}/${inserirRacao}`, {
+            const response = await fetch(`${this.baseUrl}/${inserirVacina}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,9 +52,9 @@ export default class ApiService {
     }
 
     // Método PUT para atualizar dados
-    async put(atualizarRacao, id, data) {
+    async put(atualizarVacina, id, data) {
         try {
-            const response = await fetch(`${this.baseUrl}/${atualizarRacao}?id=${id}`, {
+            const response = await fetch(`${this.baseUrl}/${atualizarVacina}?id=${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,9 +71,10 @@ export default class ApiService {
         }
     }
 
-    async delete(deletarRacao) {
+    // Método DELETE para excluir dados
+    async delete(deletarVacina) {
         try {
-            const response = await fetch(`${this.baseUrl}/${deletarRacao}`, {
+            const response = await fetch(`${this.baseUrl}/${deletarVacina}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue';
 import ApiService from './ApiService';
 
 const api = new ApiService();
-const racaoId = ref('');
+const idRacao = ref('');
 const racaoData = ref(null);
 const novaRacao = ref({ nomeRacao: '', peso: 0, unidadeMedida: ''});
 const mensagem = ref('');
@@ -13,21 +13,21 @@ const listaTipoAnimal = ref();
 // Função para consultar racaos por ID
 const consultarRacaoPorId = async () => {
     try {
-        racaoData.value = await api.get(`consultarRacaoPorId?id=${racaoId.value}`);
+        racaoData.value = await api.get(`consultarRacaoPorId?id=${idRacao.value}`);
     } catch (error) {
         console.error(error);
         mensagem.value = 'Erro ao consultar racao por ID';
     }
 };
 
-// const selecionarTipoAnimal = async () => {
-//     try {
-//         listaTipoAnimal.value = await api.getTipoAnimal('selecionarTiposAnimais');
-//     } catch (error) {
-//         console.error(error);
-//         mensagem.value = 'Erro ao selecionar racao' + error.message;
-//     }
-// };
+const selecionarTipoAnimal = async () => {
+    try {
+        listaTipoAnimal.value = await api.getTipoAnimal('selecionarTiposAnimais');
+    } catch (error) {
+        console.error(error);
+        mensagem.value = 'Erro ao selecionar racao' + error.message;
+    }
+};
 
 // Função para selecionar todos as racoes
 const selecionarRacoes = async () => {
@@ -54,7 +54,7 @@ const inserirRacao = async () => {
 // Função para atualizar uma racao existente
 const atualizarRacao = async () => {
     try {
-        const resposta = await api.put('atualizarRacao',racaoId.value, novaRacao.value);
+        const resposta = await api.put('atualizarRacao',idRacao.value, novaRacao.value);
         mensagem.value = 'Racao atualizado com sucesso!';
         console.log(resposta);
     } catch (error) {
@@ -66,7 +66,7 @@ const atualizarRacao = async () => {
 // Função para deletar uma racao
 const deletarRacao = async () => {
     try {
-        const resposta = await api.delete(`deletarRacao?id=${racaoId.value}`);
+        const resposta = await api.delete(`deletarRacao?id=${idRacao.value}`);
         mensagem.value = 'Racao deletado com sucesso!';
         console.log(resposta);
     } catch (error) {
@@ -75,15 +75,15 @@ const deletarRacao = async () => {
     }
 };
 
-// onMounted(() => {
-//     selecionarTipoAnimal();
-// });
+onMounted(() => {
+    selecionarTipoAnimal();
+});
 </script>
 
 <template>
     <div>
         <!-- Input para consultar racao por ID -->
-        <InputCustom label="ID da Racao" v-model="racaoId" />
+        <InputCustom label="ID da Racao" v-model="idRacao" />
         <button @click="consultarRacaoPorId">Consultar Racao por ID</button>
         
         <!-- Botão para selecionar todas as racoes -->
@@ -95,11 +95,11 @@ const deletarRacao = async () => {
         <InputCustom label="Peso da Racao" v-model="novaRacao.peso" />
         <InputCustom label="Unidade de Medida" v-model="novaRacao.unidadeMedida" />
         <button @click="inserirRacao">Inserir Racao</button>
-        <!-- <div>
+        <div>
             <select>
                 <option v-for="item in listaTipoAnimal"  :key="item.idTipoAnimal">{{ item.animal }}</option>
             </select>
-        </div> -->
+        </div>
 
         <!-- Botão para atualizar uma racao existente -->
         <button @click="atualizarRacao">Atualizar Racao</button>
@@ -116,7 +116,7 @@ const deletarRacao = async () => {
              <pre>{{ racaoData }}</pre> 
         </div>
 
-        <!-- <table>
+        <table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -133,6 +133,6 @@ const deletarRacao = async () => {
                     <td>{{ racao.unidadeMedida }}</td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
     </div>
 </template>
