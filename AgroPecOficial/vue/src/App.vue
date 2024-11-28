@@ -64,12 +64,13 @@
 
       .container{
         font-family: "Poppins", serif;
-        display: flex;
+        /* display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
-        align-items: center;
+        align-items: center; */
         background-color: white;
         min-height: 100vh;
+        position: relative;
       }
 
       .container-button{
@@ -80,6 +81,8 @@
         gap: 1.3rem;
         background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.541);
+        position: fixed;
+        bottom: 0px;
         
 
       }

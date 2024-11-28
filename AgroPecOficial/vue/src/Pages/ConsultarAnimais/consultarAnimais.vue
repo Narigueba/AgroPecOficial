@@ -5,7 +5,7 @@ import ApiService from "./ApiService";
 
 const api = new ApiService();
 const idAnimal = ref("");
-const animalData = ref([]);
+const animalData = ref(null);
 const novoAnimal = ref({
     nomeAnimal: "",
     idade: 0,
@@ -143,17 +143,12 @@ onMounted(() => {
 });
 </script>
 <template>
-                <tr v-if="!animalData.Array" :key="animalData.idAnimal">
-                    <td>{{ animalData.idAnimal }}</td>
-                    <td>{{ animalData.nomeAnimal }}</td>
-                    <td>{{ animalData.idade }}</td>
-                    <td>{{ animalData.dataNascimento }}</td>
-                    <td>{{ animalData.sexo }}</td>
-                    <td>{{ animalData.cor }}</td>
-                    <td>{{ animalData.ninhada }}</td>
-                    <td>{{ animalData.peso }}</td>
-                    <td>{{ animalData.raca }}</td>
-                    <td>{{ animalData.tipoAnimal }}</td>
-                    <td>{{ animalData.racao }}</td>
-                </tr>
+        <div>
+            <p>{{ mensagem }}</p>
+            <div>
+                {{ animalData }}
+            </div>
+
+        </div>
+
 </template>

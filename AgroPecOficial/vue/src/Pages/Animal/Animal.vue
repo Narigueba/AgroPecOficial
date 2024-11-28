@@ -5,7 +5,7 @@ import ApiService from "./ApiService";
 
 const api = new ApiService();
 const idAnimal = ref("");
-const animalData = ref([]);
+const animalData = ref(null);
 const novoAnimal = ref({
     nomeAnimal: "",
     idade: 0,
@@ -173,18 +173,16 @@ const selecionarRacoes = async () => {
                 </select>
             </div>
             <div class="container-tipo_racao">
-                <select v-model="novoAnimal.racao.idRacao" class="container-tipo_racao_lista">
+                <select v-model="novoAnimal.racao.idRacao" class="container-tipo_racao_lista grow" @click="selecionarRacoes">
                     <option v-for="item in listaRacao" :key="item.idRacao" :value="item.idRacao">
                         {{ item.nomeRacao }}
                     </option>
                 </select>
-                <button class="container-tipo_racao_btn btn">inserir Racao</button>
+                <button  class="container-tipo_racao_btn btn grow">inserir Racao</button>
             </div>
             <div class="inserir-animal-flex">
-                <button @click="inserirAnimais" class="btn inserir-cod">inserir Animal</button>
-
+                <button @click="inserirAnimais" class="btn inserir-cod-animal">inserir Animal</button>
             </div>
-
             <p>{{ mensagem }}</p>
         </div>
     </div>
@@ -329,12 +327,19 @@ const selecionarRacoes = async () => {
             gap: 1rem;
         }
 
-        .container-tipo_racao_lista{
-            flex-grow: 1;
-            border-radius: .5rem;
-            border: 1px solid #ccc;
-            
+        .grow{
+            flex: 1 0 0;
         }
+
+        .container-tipo_racao_lista{
+            border-radius: .5rem;
+            border: 1px solid #ccc;       
+        }
+
+        .inserir-cod-animal{
+            margin: 1rem 0 12rem;
+        }
+
 
 
 </style>
