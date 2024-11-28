@@ -83,22 +83,25 @@ const deletarRacao = async () => {
 </script>
 <template>
     <div>
-            <!-- Botão para selecionar todas as racoes -->
-       <!--     <button 
-            class="btn selecionar-btn"  
-            @click="selecionarRacoes">Selecionar Rações
-            </button>-->
-
+        <div class="container-content">
+            <RouterLink to="/racao"><i class="pi pi-angle-left back"></i></RouterLink>
+        </div>
+        <div class="container-mensagem">
+                <!-- Botão para selecionar todas as racoes -->
+                <!--     <button 
+                class="btn selecionar-btn"  
+                @click="selecionarRacoes">Selecionar Rações
+                </button>-->
             <p class="mensagem">{{ mensagem }}</p>
-
         <!-- Exibição de dados da racao consultada -->
         <!-- <div v-if="racaoData"> 
             <h4>Detalhes da Racao:</h4> 
             <pre>{{ racaoData }}</pre> 
         </div> -->
-        <div>
-            {{ racaoData }}
+        <div class="container-dados-enviados">
+            <p>{{ racaoData }}</p>
         </div>
+    </div>
         
     </div>
 
@@ -107,5 +110,14 @@ const deletarRacao = async () => {
     
 </template>
 <style scoped>
+.back{
+    color: white;
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 2rem;
+    background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+    padding: .6rem;
+    border-radius: 50%;
+}
 
 </style>

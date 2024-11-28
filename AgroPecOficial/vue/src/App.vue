@@ -4,13 +4,13 @@
 <template>
 
       <main class="container">
-        <nav class="container-button">
+        <!-- <nav class="container-button">
           <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
           <RouterLink to="/Animal" class="button-links"><i class="pi pi-id-card"></i></RouterLink>
           <RouterLink to="/racao" class="button-links"><i class="pi pi-warehouse"></i></RouterLink>
           <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
           <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
-        </nav>
+        </nav> -->
         <RouterView class="router"/>
       </main>
 
@@ -83,8 +83,8 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.541);
         position: fixed;
         bottom: 0px;
-        
-
+        left: 0px;
+        visibility: visible;
       }
 
       .button-links{

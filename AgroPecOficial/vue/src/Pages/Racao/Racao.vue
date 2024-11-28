@@ -83,6 +83,13 @@ const deletarRacao = async () => {
 
 <template>
     <div>
+        <nav class="container-button">
+          <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
+          <RouterLink to="/Animal" class="button-links"><i class="pi pi-id-card"></i></RouterLink>
+          <RouterLink to="/racao" class="button-links"><i class="pi pi-warehouse"></i></RouterLink>
+          <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
+          <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
+        </nav>
         <!-- <h1 class="router-title">Ração</h1> -->
         <div class="container-consultar_racao">
             <h4 class="container-title">Consultar Ração</h4>

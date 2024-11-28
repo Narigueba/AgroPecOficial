@@ -80,14 +80,30 @@ onMounted(() => {
 });
 </script>
 <template>
+    <div>
+        <div class="container-content">
+            <RouterLink to="/vacina"><i class="pi pi-angle-left back"></i></RouterLink>
+        </div>
         <div class="mensagem">
             <!-- Exibição de mensagem -->
             <p>{{ mensagem }}</p>
-
+            
             <!-- Exibição de dados da racao consultada -->
             <div v-if="vacinaData"> 
                 <h4>Detalhes da Vacina:</h4> 
                 <pre>{{ vacinaData }}</pre> 
             </div>
         </div>
-</template>
+    </div>
+    </template>
+    <style scoped>
+        .back{
+            color: white;
+            font-size: 1rem;
+            text-align: left;
+            margin-bottom: 2rem;
+            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+            padding: .6rem;
+            border-radius: 50%;
+        }
+    </style>

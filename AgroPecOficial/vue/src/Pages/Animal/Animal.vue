@@ -145,6 +145,13 @@ const selecionarRacoes = async () => {
 
 <template>
     <div>
+        <nav class="container-button">
+          <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
+          <RouterLink to="/Animal" class="button-links"><i class="pi pi-id-card"></i></RouterLink>
+          <RouterLink to="/racao" class="button-links"><i class="pi pi-warehouse"></i></RouterLink>
+          <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
+          <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
+        </nav>
         <div class="container-consultar_animal">   
             <h4 class="container-title">Consultar Animal</h4>
             <InputCustom placeholder="Cod. do Animal" v-model="idAnimal" class="inserir-cod"/>
@@ -261,7 +268,7 @@ const selecionarRacoes = async () => {
 
 <style scoped>
 
-.container-consultar_animal{
+        .container-consultar_animal{
             margin: 0 0 2.5rem;
         }
 
@@ -339,7 +346,5 @@ const selecionarRacoes = async () => {
         .inserir-cod-animal{
             margin: 1rem 0 12rem;
         }
-
-
 
 </style>

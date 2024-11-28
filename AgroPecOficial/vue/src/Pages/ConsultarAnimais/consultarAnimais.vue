@@ -144,11 +144,24 @@ onMounted(() => {
 </script>
 <template>
         <div>
+            <div class="container-content">
+                <RouterLink to="/animal"><i class="pi pi-angle-left back"></i></RouterLink>
+            </div>
             <p>{{ mensagem }}</p>
             <div>
                 {{ animalData }}
             </div>
 
         </div>
-
 </template>
+<style scoped>
+        .back{
+            color: white;
+            font-size: 1rem;
+            text-align: left;
+            margin-bottom: 2rem;
+            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+            padding: .6rem;
+            border-radius: 50%;
+        }
+</style>
