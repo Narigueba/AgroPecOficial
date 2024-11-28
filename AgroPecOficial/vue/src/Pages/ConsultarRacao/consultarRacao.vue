@@ -11,6 +11,8 @@ const novaRacao = ref({ nomeRacao: '', peso: 0, unidadeMedida: ''});
 const mensagem = ref('');
 const listaTipoAnimal = ref(); 
 
+//buscar o id por parametro URL to="/consultarRacao/id"
+
 // Função para consultar racaos por ID
 const consultarRacaoPorId = async () => {
     try {
@@ -76,14 +78,25 @@ const deletarRacao = async () => {
     }
 };
 
+
 // onMounted(() => {
 //     selecionarTipoAnimal();
 // });
 </script>
 <template>
+    <div>
             <!-- Input para consultar racao por ID -->
             <button 
             class="btn consultar-btn"         
             @click="consultarRacaoPorId">Consultar por código
             </button>
+            <!-- Exibição de mensagem -->
+            <p class="mensagem">{{ mensagem }}</p>
+
+            <!-- Exibição de dados da racao consultada -->
+            <div v-if="racaoData"> 
+                <h4>Detalhes da Racao:</h4> 
+                <pre>{{ racaoData }}</pre> 
+            </div>
+    </div>
 </template>

@@ -88,7 +88,8 @@ const deletarRacao = async () => {
             <h4 class="container-title">Consultar Ração</h4>
             <InputCustom v-model="racaoId" placeholder="Cod. da Ração" class="inserir-cod" />
             <div class="consultar-racao-flex">
-                <RouterLink to="/consultarRacao" class="btn consultar-btn">Consultar Ração</RouterLink>
+                <!-- passando id por parametro URL -->
+                <RouterLink to="/consultarRacao/id" class="btn consultar-btn">Consultar Ração</RouterLink>
                 <RouterLink to="/consultarRacoes" class="btn selecionar-btn">Selecionar Rações</RouterLink>
             </div>
         </div>

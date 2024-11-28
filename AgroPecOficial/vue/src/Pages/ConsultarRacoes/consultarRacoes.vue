@@ -76,15 +76,36 @@ const deletarRacao = async () => {
     }
 };
 
-// onMounted(() => {
-//     selecionarTipoAnimal();
-// });
+ onMounted(() => {
+    selecionarRacoes();
+ });
+
 </script>
 <template>
+    <div>
             <!-- Botão para selecionar todas as racoes -->
-            <button 
+       <!--     <button 
             class="btn selecionar-btn"  
             @click="selecionarRacoes">Selecionar Rações
-            </button>
+            </button>-->
+
+            <p class="mensagem">{{ mensagem }}</p>
+
+        <!-- Exibição de dados da racao consultada -->
+        <!-- <div v-if="racaoData"> 
+            <h4>Detalhes da Racao:</h4> 
+            <pre>{{ racaoData }}</pre> 
+        </div> -->
+        <div>
+            {{ racaoData }}
+        </div>
+        
+    </div>
+
+
+            
     
 </template>
+<style scoped>
+
+</style>

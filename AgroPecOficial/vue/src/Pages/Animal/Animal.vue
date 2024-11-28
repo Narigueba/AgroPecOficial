@@ -137,73 +137,82 @@ const selecionarRacoes = async () => {
     }
 };
 
-onMounted(() => {
-    selecionarRacoes();
-    selecionarTipoAnimal();
-});
+// onMounted(() => {
+//     selecionarRacoes();
+//     selecionarTipoAnimal();
+// });
 </script>
 
 <template>
     <div>
-        <!-- Input para consultar animais por ID -->
-        <InputCustom label="ID do Animal" v-model="idAnimal" />
-        <button @click="consultarAnimaisPorId">Consultar Animal por ID</button>
-
-        <!-- Botão para selecionar todos os animais -->
-        <button @click="selecionarAnimais">Selecionar Animais</button>
-
-        <!-- Inputs para inserir novo animal -->
-        <InputCustom label="Nome do Animal" v-model="novoAnimal.nomeAnimal" />
-        <InputCustom label="Idade do Animal" v-model="novoAnimal.idade" />
-        <InputCustom
-            type="date"
-            label="Data de Nascimento do Animal"
-            v-model="novoAnimal.dataNascimento"
-        />
-        <InputCustom label="Sexo do Animal" v-model="novoAnimal.sexo" />
-        <InputCustom label="Cor do Animal" v-model="novoAnimal.cor" />
-        <InputCustom label="Ninhada do Animal" v-model="novoAnimal.ninhada" />
-        <InputCustom label="Peso do Animal" v-model="novoAnimal.peso" />
-        <InputCustom label="Raca do Animal" v-model="novoAnimal.raca" />
-        <div v-if="listaTipoAnimal.length > 0">
-            <select v-model="novoAnimal.tipoAnimal.idTipoAnimal">
-                <option
-                    v-for="item in listaTipoAnimal"
-                    :key="item.idTipoAnimal"
-                    :value="item.idTipoAnimal"
-                >
-                    {{ item.animal }}
-                </option>
-            </select>
+        <div class="container-consultar_animal">   
+            <h4 class="container-title">Consultar Animal</h4>
+            <InputCustom placeholder="Cod. do Animal" v-model="idAnimal" class="inserir-cod"/>
+            <div class="consultar-animal-flex">
+                <RouterLink to="/consultarAnimal" class="btn consultar-btn">Consultar Animal</RouterLink>
+                <RouterLink to="/consultarAnimais" class="btn selecionar-btn">Selecionar Animais</RouterLink>
+            </div>
         </div>
-        <div style="display: flex;">
-            <div>
-                <select v-model="novoAnimal.racao.idRacao">
-                    <option
-                        v-for="item in listaRacao"
-                        :key="item.idRacao"
-                        :value="item.idRacao"
-                    >
-                        {{ item.nomeRacao }}
+        <div class="container-inserir_animal">
+            <h4 class="container-title">Inserir Novo Animal</h4>
+            <div class="inserir-dados">
+                    <InputCustom placeholder="Nome do Animal" v-model="novoAnimal.nomeAnimal" class="nome-animal inserir-cod"  />
+                    <InputCustom placeholder="Idade do Animal" v-model="novoAnimal.idade" class="idade-animal inserir-cod" />
+                    <InputCustom type="date" placeholder="Data de Nascimento do Animal" v-model="novoAnimal.dataNascimento" class="nascimento-animal inserir-cod"/>
+                    <InputCustom placeholder="Sexo do Animal" v-model="novoAnimal.sexo" class="sexo-animal inserir-cod" />
+                    <InputCustom placeholder="Cor do Animal" v-model="novoAnimal.cor" class="cor-animal inserir-cod" />
+                    <InputCustom placeholder="Ninhada do Animal" v-model="novoAnimal.ninhada" class="ninhada-animal inserir-cod"/>
+                    <InputCustom placeholder="Peso do Animal" v-model="novoAnimal.peso" class="peso-animal inserir-cod"/>
+                    <InputCustom placeholder="Raca do Animal" v-model="novoAnimal.raca" class="raca-animal inserir-cod" />
+            </div>
+            <div v-if="listaTipoAnimal.length > 0">
+                <select v-model="novoAnimal.tipoAnimal.idTipoAnimal">
+                    <option v-for="item in listaTipoAnimal" :key="item.idTipoAnimal" :value="item.idTipoAnimal">
+                        {{ item.animal }}
                     </option>
                 </select>
             </div>
-            <div>
-                <button>inserir Racao</button>
+            <div class="container-tipo_racao">
+                <select v-model="novoAnimal.racao.idRacao" class="container-tipo_racao_lista">
+                    <option v-for="item in listaRacao" :key="item.idRacao" :value="item.idRacao">
+                        {{ item.nomeRacao }}
+                    </option>
+                </select>
+                <button class="container-tipo_racao_btn btn">inserir Racao</button>
             </div>
-        </div>
-        <button @click="inserirAnimais">inserir Animal</button>
+            <div class="inserir-animal-flex">
+                <button @click="inserirAnimais" class="btn inserir-cod">inserir Animal</button>
 
-        <!-- Botão para atualizar um animal existente -->
+            </div>
+
+            <p>{{ mensagem }}</p>
+        </div>
+    </div>
+    <!-- <div>
+        Input para consultar animais por ID
+
+        <button @click="consultarAnimaisPorId">Consultar Animal por ID</button>
+
+        Botão para selecionar todos os animais
+        <button @click="selecionarAnimais">Selecionar Animais</button>
+
+        Inputs para inserir novo animal
+
+
+
+
+
+
+        Botão para atualizar um animal existente
         <button @click="atualizarAnimal">Atualizar Animal</button>
 
-        <!-- Botão para deletar um animal existente -->
+        Botão para deletar um animal existente
         <button @click="deletarAnimal">Deletar Animal</button>
 
-        <!-- Exibição de mensagem -->
+        Exibição de mensagem
         <p>{{ mensagem }}</p>
 
-        <!-- Exibição de dados do animal consultado -->
+        Exibição de dados do animal consultado
         <table>
             <thead>
                 <tr>
@@ -221,7 +230,7 @@ onMounted(() => {
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr v-if="!animalData.Array" :key="animalData.idAnimal">
+                <tr v-if="!animalData.Array" :key="animalData.idAnimal">
                     <td>{{ animalData.idAnimal }}</td>
                     <td>{{ animalData.nomeAnimal }}</td>
                     <td>{{ animalData.idade }}</td>
@@ -233,7 +242,7 @@ onMounted(() => {
                     <td>{{ animalData.raca }}</td>
                     <td>{{ animalData.tipoAnimal }}</td>
                     <td>{{ animalData.racao }}</td>
-                </tr> -->
+                </tr>
                 <tr v-for="animal in animalData" :key="animal.idAnimal">
                     <td>{{ animal.idAnimal }}</td>
                     <td>{{ animal.nomeAnimal }}</td>
@@ -249,5 +258,83 @@ onMounted(() => {
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </template>
+
+<style scoped>
+
+.container-consultar_animal{
+            margin: 0 0 2.5rem;
+        }
+
+        .container-title{
+            font-size: 1.25rem;
+            text-transform: capitalize;
+            border-bottom: 2px solid #2C5C18;
+            max-width: max-content;
+            color: #2C5C18;
+            font-weight: 400;
+        }
+
+        .inserir-cod{
+            margin: 1rem 0 1rem;
+        }
+
+        .consultar-animal-flex{
+            display: flex;
+            gap: .5rem;
+        }
+
+        .btn{
+            font-size: .8rem;
+            flex: 1 0 0;
+            padding: .6rem 1rem;
+            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+            color: white;
+            border: none;
+            border-radius: .5rem;   
+            box-shadow: 5px 5px 10px rgba(105, 105, 105, 0.308);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .inserir-animal-flex{
+            display: flex;
+            gap: .5rem;
+        }
+
+        .inserir-btn{
+            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+        }
+
+        .atualizar-btn{
+            background-image: radial-gradient( circle 957px at 8.7% 50.5%,  rgba(246,191,13,1) 0%, rgba(249,47,47,1) 90% );
+        }
+
+        .deletar-btn{
+            background-image: radial-gradient( circle 817.6px at 10% 20%,  rgba(178,34,34,1) 0%, rgba(255,87,51,1) 41.9%, rgba(255,165,0,1) 100.2% );
+        }
+
+
+        .mensagem{
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .container-tipo_racao{
+            display: flex;
+            gap: 1rem;
+        }
+
+        .container-tipo_racao_lista{
+            flex-grow: 1;
+            border-radius: .5rem;
+            border: 1px solid #ccc;
+            
+        }
+
+
+</style>
