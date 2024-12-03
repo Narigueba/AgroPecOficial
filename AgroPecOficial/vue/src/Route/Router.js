@@ -13,6 +13,11 @@ import TipoAnimal from '../Pages/TipoAnimal/TipoAnimal.vue'
 import Animal from '../Pages/Animal/Animal.vue'
 import ConsultarAnimal from '../Pages/ConsultarAnimal/consultarAnimal.vue'
 import ConsultarAnimais from '../Pages/ConsultarAnimais/consultarAnimais.vue'
+import Usuario from '../Pages/Usuario/usuario.vue'
+import Favoritos from '../Pages/Favoritos/favoritos.vue'
+import Suporte from '../Pages/Suporte/suporte.vue'
+import Logout from '../Pages/Logout/logout.vue'
+
 
 
 const routes = [
@@ -28,7 +33,11 @@ const routes = [
   { path: '/TipoAnimal', component: TipoAnimal },
   { path: '/Animal', component: Animal },
   { path: '/consultarAnimal', component: ConsultarAnimal },
-  { path: '/consultarAnimais', component: ConsultarAnimais }
+  { path: '/consultarAnimais', component: ConsultarAnimais },
+  { path: '/usuario', component: Usuario },
+  { path: '/favoritos', component: Favoritos },
+  { path: '/suporte', component: Suporte },
+  { path: '/logout', component: Logout }
 ]
 
 const router = createRouter({

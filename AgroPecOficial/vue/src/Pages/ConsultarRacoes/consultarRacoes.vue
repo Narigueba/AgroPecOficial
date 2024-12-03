@@ -80,44 +80,97 @@ const deletarRacao = async () => {
     selecionarRacoes();
  });
 
+ 
 </script>
 <template>
-    <div>
-        <div class="container-content">
-            <RouterLink to="/racao"><i class="pi pi-angle-left back"></i></RouterLink>
-        </div>
-        <div class="container-mensagem">
-                <!-- Botão para selecionar todas as racoes -->
-                <!--     <button 
-                class="btn selecionar-btn"  
-                @click="selecionarRacoes">Selecionar Rações
-                </button>-->
-            <p class="mensagem">{{ mensagem }}</p>
-        <!-- Exibição de dados da racao consultada -->
-        <!-- <div v-if="racaoData"> 
-            <h4>Detalhes da Racao:</h4> 
-            <pre>{{ racaoData }}</pre> 
-        </div> -->
-        <div class="container-dados-enviados">
-            <p>{{ racaoData }}</p>
-        </div>
-    </div>
-        
-    </div>
+        <div>
+            <div class="container-content">
+                <div class="router-link-back">
+                    <RouterLink to="/racao"><i class="pi pi-angle-left back"></i></RouterLink>
+                </div>        
+                <div class="dados-container">
+                    <ul>
+                        <li v-for="racao in racaoData" :key="racao.id" :class="{ importante: racao.peso > 5 }" class="item-racao">
+                            <img src="" alt="">
+                            <div class="dados-recebidos grow">
+                                <div class="dados-nome">
+                                    <p class="w-700">Nome:</p>
+                                    <p class="w-300">{{ racao.nomeRacao }}</p>
+                                </div>
+                                <div class="dados-peso">
+                                    <p class="w-700">Peso:</p>
+                                    <div class="dados-valor-peso">
+                                        <p class="w-300">{{ racao.peso }}</p>
+                                        <p class="racao-medida w-300">{{ racao.unidadeMedida }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="racao-atualizar-deletar">
+                                <button @click="atualizarRacao" class="btn atualizar-btn">Atualizar</button>
+                                <button @click="deletarRacao" class="btn deletar-btn">Deletar</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>     
+        <!-- <p class="mensagem">{{ mensagem }}</p> -->
+
 
 
             
     
 </template>
 <style scoped>
-.back{
-    color: white;
-    font-size: 1rem;
-    text-align: left;
-    margin-bottom: 2rem;
-    background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
-    padding: .6rem;
-    border-radius: 50%;
+
+    .dados-container{
+        margin: 0 auto;
+        width: 80%;
+
 }
+    ul{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    }
+    .item-racao{
+        display: flex;
+        background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+        color: white;
+        padding: 1rem;
+        border-radius: 10px ;
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.473);
+        gap: 1rem;      
+    }
+    .grow{
+        flex: 1 0 0;
+    }
+    .dados-recebidos{
+        display: flex;
+        flex-direction: column;
+    }
+    .dados-nome{
+        display: flex;
+        gap: 0.5rem;
+    }
+    .dados-peso{
+        display: flex;
+        gap: 0.5rem;
+    }
+    .dados-valor-peso{
+        display: flex;
+        gap: 0.1rem;
+    }
+    .racao-atualizar-deletar{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+
+
 
 </style>

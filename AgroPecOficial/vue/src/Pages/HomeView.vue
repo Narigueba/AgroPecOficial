@@ -1,4 +1,8 @@
 <template>
+  <div class="container-flex">
+    <div class="grow padding">
+
+    </div>
     <div>
         <nav class="container-button">
           <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
@@ -8,6 +12,7 @@
           <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
         </nav>
     </div>
+  </div>
 </template>
 <style scoped>
 

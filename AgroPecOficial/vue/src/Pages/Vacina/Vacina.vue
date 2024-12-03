@@ -82,7 +82,30 @@ const deletarVacina = async () => {
 
 <template>
 
-    <div>
+    <div class="container-flex">
+        <div class="grow padding">
+            <div class="container-consultar_vacina bottom">
+                <h4 class="container-title">Consultar Vacina</h4>
+                <!-- Input para consultar racao por ID -->
+                <InputCustom  placeholder="Cod. da Vacina" v-model="vacinaId" class="inserir-cod"/>
+                <div class="consultar-vacina-flex">
+                    <RouterLink to="/consultarVacina" class="btn consultar-btn">Consultar Vacina</RouterLink>
+                    <RouterLink to="/consultarVacinas" class="btn selecionar-btn">Selecionar Vacinas</RouterLink>
+                </div>
+            </div>
+            <div class="container-inserir_vacina">
+                <h4 class="container-title">Inserir Nova Vacina</h4>
+                <!-- Inputs para inserir nova vacina -->
+                <InputCustom placeholder="Nome da Vacina" v-model="novaVacina.tipoVacina" class="inserir-cod"/>
+                <div class="inserir-vacina-flex">
+                    <button @click="inserirVacina" class="btn inserir-btn">Inserir Vacina</button>
+                </div>
+                <!-- Botão para atualizar uma racao existente
+                    <button @click="atualizarVacina">Atualizar Vacina</button>
+                    Botão para deletar uma racao
+                    <button @click="deletarVacina">Deletar Vacina</button> -->
+            </div>
+        </div>
         <nav class="container-button">
           <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
           <RouterLink to="/Animal" class="button-links"><i class="pi pi-id-card"></i></RouterLink>
@@ -90,37 +113,6 @@ const deletarVacina = async () => {
           <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
           <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
         </nav>
-        <div class="container-consultar_vacina">
-            <h4 class="container-title">Consultar Vacina</h4>
-            <!-- Input para consultar racao por ID -->
-            <InputCustom  placeholder="Cod. da Vacina" v-model="vacinaId" class="inserir-cod"/>
-            <div class="consultar-vacina-flex">
-                <RouterLink to="/consultarVacina" class="btn consultar-btn">Consultar Vacina</RouterLink>
-                <RouterLink to="/consultarVacinas" class="btn selecionar-btn">Selecionar Vacinas</RouterLink>
-            </div>
-        </div>
-        <div class="container-inserir_vacina">
-            <h4 class="container-title">Inserir Nova Vacina</h4>
-            <!-- Inputs para inserir nova vacina -->
-            <InputCustom placeholder="Nome da Vacina" v-model="novaVacina.tipoVacina" class="inserir-cod"/>
-            <div class="inserir-vacina-flex">
-                <button @click="inserirVacina" class="btn inserir-btn">Inserir Vacina</button>
-            </div>
-            <!-- Botão para atualizar uma racao existente
-            <button @click="atualizarVacina">Atualizar Vacina</button>
-            Botão para deletar uma racao
-            <button @click="deletarVacina">Deletar Vacina</button> -->
-        </div>
-        <div class="mensagem">
-            <!-- Exibição de mensagem -->
-            <p>{{ mensagem }}</p>
-
-            <!-- Exibição de dados da racao consultada -->
-            <div v-if="vacinaData"> 
-                <h4>Detalhes da Vacina:</h4> 
-                <pre>{{ vacinaData }}</pre> 
-            </div>
-        </div>
     </div>
 
             <!-- <div>
@@ -150,19 +142,6 @@ const deletarVacina = async () => {
 
 <style scoped>
 
-        .container-consultar_vacina{
-            margin: 0 0 2.5rem;
-        }
-
-        .container-title{
-            font-size: 1.25rem;
-            text-transform: capitalize;
-            border-bottom: 2px solid #2C5C18;
-            max-width: max-content;
-            color: #2C5C18;
-            font-weight: 400;
-        }
-
         .inserir-cod{
             margin: 1rem 0 1rem;
         }
@@ -170,22 +149,6 @@ const deletarVacina = async () => {
         .consultar-vacina-flex{
             display: flex;
             gap: .5rem;
-        }
-
-        .btn{
-            font-size: .8rem;
-            flex: 1 0 0;
-            padding: .6rem 1rem;
-            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
-            color: white;
-            border: none;
-            border-radius: .5rem;   
-            box-shadow: 5px 5px 10px rgba(105, 105, 105, 0.308);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
 
         .nome-racao{

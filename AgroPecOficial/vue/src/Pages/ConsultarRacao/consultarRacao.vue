@@ -85,18 +85,20 @@ const deletarRacao = async () => {
 </script>
 <template>
     <div>
-            <!-- Input para consultar racao por ID -->
-            <button 
-            class="btn consultar-btn"         
-            @click="consultarRacaoPorId">Consultar por código
-            </button>
-            <!-- Exibição de mensagem -->
-            <p class="mensagem">{{ mensagem }}</p>
+        <div class="router-link-back">
+            <RouterLink to="/racao"><i class="pi pi-angle-left back"></i></RouterLink>  
+        </div>  
+        <!-- Exibição de mensagem -->
+        <p class="mensagem">{{ mensagem }}</p>
 
-            <!-- Exibição de dados da racao consultada -->
-            <div v-if="racaoData"> 
-                <h4>Detalhes da Racao:</h4> 
-                <pre>{{ racaoData }}</pre> 
-            </div>
+        <!-- Exibição de dados da racao consultada -->
+        <div v-if="racaoData"> 
+            <h4>Detalhes da Racao:</h4> 
+            <pre>{{ racaoData }}</pre> 
+        </div>
     </div>
 </template>
+
+<style scoped>
+
+</style>

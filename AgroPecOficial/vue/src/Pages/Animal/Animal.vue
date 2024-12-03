@@ -5,7 +5,7 @@ import ApiService from "./ApiService";
 
 const api = new ApiService();
 const idAnimal = ref("");
-const animalData = ref(null);
+const animalData = ref([]);
 const novoAnimal = ref({
     nomeAnimal: "",
     idade: 0,
@@ -144,25 +144,19 @@ const selecionarRacoes = async () => {
 </script>
 
 <template>
-    <div>
-        <nav class="container-button">
-          <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
-          <RouterLink to="/Animal" class="button-links"><i class="pi pi-id-card"></i></RouterLink>
-          <RouterLink to="/racao" class="button-links"><i class="pi pi-warehouse"></i></RouterLink>
-          <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
-          <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
-        </nav>
-        <div class="container-consultar_animal">   
-            <h4 class="container-title">Consultar Animal</h4>
-            <InputCustom placeholder="Cod. do Animal" v-model="idAnimal" class="inserir-cod"/>
-            <div class="consultar-animal-flex">
-                <RouterLink to="/consultarAnimal" class="btn consultar-btn">Consultar Animal</RouterLink>
-                <RouterLink to="/consultarAnimais" class="btn selecionar-btn">Selecionar Animais</RouterLink>
+    <div class="container-flex">
+        <div class="grow padding">
+            <div class="container-consultar_animal bottom">   
+                <h4 class="container-title">Consultar Animal</h4>
+                <InputCustom placeholder="Cod. do Animal" v-model="idAnimal" class="inserir-cod"/>
+                <div class="consultar-animal-flex">
+                    <RouterLink to="/consultarAnimal" class="btn consultar-btn">Consultar Animal</RouterLink>
+                    <RouterLink to="/consultarAnimais" class="btn selecionar-btn">Selecionar Animais</RouterLink>
+                </div>
             </div>
-        </div>
-        <div class="container-inserir_animal">
-            <h4 class="container-title">Inserir Novo Animal</h4>
-            <div class="inserir-dados">
+            <div class="container-inserir_animal">
+                <h4 class="container-title">Inserir Novo Animal</h4>
+                <div class="inserir-dados">
                     <InputCustom placeholder="Nome do Animal" v-model="novoAnimal.nomeAnimal" class="nome-animal inserir-cod"  />
                     <InputCustom placeholder="Idade do Animal" v-model="novoAnimal.idade" class="idade-animal inserir-cod" />
                     <InputCustom type="date" placeholder="Data de Nascimento do Animal" v-model="novoAnimal.dataNascimento" class="nascimento-animal inserir-cod"/>
@@ -171,33 +165,42 @@ const selecionarRacoes = async () => {
                     <InputCustom placeholder="Ninhada do Animal" v-model="novoAnimal.ninhada" class="ninhada-animal inserir-cod"/>
                     <InputCustom placeholder="Peso do Animal" v-model="novoAnimal.peso" class="peso-animal inserir-cod"/>
                     <InputCustom placeholder="Raca do Animal" v-model="novoAnimal.raca" class="raca-animal inserir-cod" />
+                </div>
+                <div class="container-tipo_animal">
+                    <select v-model="novoAnimal.tipoAnimal.idTipoAnimal" @click="selecionarTipoAnimal" class="container-lista grow">
+                        <option v-for="item in listaTipoAnimal" :key="item.idTipoAnimal" :value="item.idTipoAnimal">
+                            {{ item.animal }}
+                        </option>
+                    </select>
+                    <RouterLink to="/animal" class="link"><button  class="container-tipo_racao_btn btn grow">Inserir Animal</button></RouterLink>
+                </div>
+                <div class="container-tipo_racao">
+                    <select v-model="novoAnimal.racao.idRacao" class="container-lista grow" @click="selecionarRacoes">
+                        <option v-for="item in listaRacao" :key="item.idRacao" :value="item.racao">
+                            {{ item.nomeRacao }}
+                        </option>
+                    </select>
+                    <RouterLink to="/racao" class="link"><button  class="container-tipo_racao_btn btn grow">Inserir Ração</button></RouterLink>
+                </div>
+                <div class="inserir-animal-flex">
+                    <button @click="inserirAnimais" class="btn inserir-cod-animal">Inserir Animal</button>
+                </div>
+                <!-- <p>{{ mensagem }}</p> -->
             </div>
-            <div v-if="listaTipoAnimal.length > 0">
-                <select v-model="novoAnimal.tipoAnimal.idTipoAnimal">
-                    <option v-for="item in listaTipoAnimal" :key="item.idTipoAnimal" :value="item.idTipoAnimal">
-                        {{ item.animal }}
-                    </option>
-                </select>
-            </div>
-            <div class="container-tipo_racao">
-                <select v-model="novoAnimal.racao.idRacao" class="container-tipo_racao_lista grow" @click="selecionarRacoes">
-                    <option v-for="item in listaRacao" :key="item.idRacao" :value="item.idRacao">
-                        {{ item.nomeRacao }}
-                    </option>
-                </select>
-                <button  class="container-tipo_racao_btn btn grow">inserir Racao</button>
-            </div>
-            <div class="inserir-animal-flex">
-                <button @click="inserirAnimais" class="btn inserir-cod-animal">inserir Animal</button>
-            </div>
-            <p>{{ mensagem }}</p>
         </div>
+        <nav class="container-button">
+          <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
+          <RouterLink to="/Animal" class="button-links"><i class="pi pi-id-card"></i></RouterLink>
+          <RouterLink to="/racao" class="button-links"><i class="pi pi-warehouse"></i></RouterLink>
+          <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
+          <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
+        </nav>
     </div>
-    <!-- <div>
-        Input para consultar animais por ID
-
-        <button @click="consultarAnimaisPorId">Consultar Animal por ID</button>
-
+        <!-- <div>
+            Input para consultar animais por ID
+            
+            <button @click="consultarAnimaisPorId">Consultar Animal por ID</button>
+            
         Botão para selecionar todos os animais
         <button @click="selecionarAnimais">Selecionar Animais</button>
 
@@ -268,17 +271,8 @@ const selecionarRacoes = async () => {
 
 <style scoped>
 
-        .container-consultar_animal{
-            margin: 0 0 2.5rem;
-        }
-
-        .container-title{
-            font-size: 1.25rem;
-            text-transform: capitalize;
-            border-bottom: 2px solid #2C5C18;
-            max-width: max-content;
-            color: #2C5C18;
-            font-weight: 400;
+        .link{
+            text-decoration: none;
         }
 
         .inserir-cod{
@@ -288,22 +282,6 @@ const selecionarRacoes = async () => {
         .consultar-animal-flex{
             display: flex;
             gap: .5rem;
-        }
-
-        .btn{
-            font-size: .8rem;
-            flex: 1 0 0;
-            padding: .6rem 1rem;
-            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
-            color: white;
-            border: none;
-            border-radius: .5rem;   
-            box-shadow: 5px 5px 10px rgba(105, 105, 105, 0.308);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
 
         .inserir-animal-flex{
@@ -332,19 +310,26 @@ const selecionarRacoes = async () => {
         .container-tipo_racao{
             display: flex;
             gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .container-tipo_animal{
+            display: flex;
+            gap: 1rem;
         }
 
         .grow{
             flex: 1 0 0;
         }
 
-        .container-tipo_racao_lista{
+        .container-lista{
             border-radius: .5rem;
             border: 1px solid #ccc;       
         }
 
         .inserir-cod-animal{
-            margin: 1rem 0 12rem;
+            margin: 1rem 0 10rem;
         }
+
 
 </style>

@@ -103,7 +103,7 @@ namespace AgroPec.Controllers
 
                 command.CommandText = $"INSERT INTO Racao (NomeRacao, Peso, UnidadeMedida) VALUES ('{racao.NomeRacao}', {racao.Peso}, '{racao.UnidadeMedida}')";
 
-                command.ExecuteNonQueryAsync();
+                command.ExecuteNonQuery();
 
                 _context.CloseConnection();
 

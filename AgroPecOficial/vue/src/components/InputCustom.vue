@@ -34,13 +34,6 @@
   </script>
   
   <style scoped>
-  input {
-    padding: 10px;
-    font-size: .8rem;
-    border: 1px solid #ccccccc5;
-    border-radius: .5rem;
-    width: 100%;
-  }
   
   input:focus {
     outline: none;

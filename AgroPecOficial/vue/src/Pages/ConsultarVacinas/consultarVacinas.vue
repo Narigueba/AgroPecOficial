@@ -81,29 +81,60 @@ onMounted(() => {
 </script>
 <template>
     <div>
-        <div class="container-content">
+        <div class="router-link-back">
             <RouterLink to="/vacina"><i class="pi pi-angle-left back"></i></RouterLink>
         </div>
-        <div class="mensagem">
-            <!-- Exibição de mensagem -->
-            <p>{{ mensagem }}</p>
-            
-            <!-- Exibição de dados da racao consultada -->
-            <div v-if="vacinaData"> 
-                <h4>Detalhes da Vacina:</h4> 
-                <pre>{{ vacinaData }}</pre> 
-            </div>
+        <div class="container-mensagem">
+            <!-- <p class="mensagem">{{ mensagem }}</p> -->
+            <ul>
+                <li v-for="vacina in vacinaData" :key="vacina.id" class="item-vacina">
+                    <img src="" alt="">
+                    <div class="nome-vacina">
+                        <p class="w-700">Nome: </p>
+                        <p class="w-200">{{ vacina.tipoVacina }}</p>
+                    </div>    
+                    <div class="racao-atualizar-deletar">
+                        <button @click="atualizarVacina" class="btn atualizar-btn">Atualizar</button>
+                        <button @click="deletarVacina" class="btn deletar-btn">Deletar</button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
     </template>
     <style scoped>
-        .back{
-            color: white;
-            font-size: 1rem;
-            text-align: left;
-            margin-bottom: 2rem;
-            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
-            padding: .6rem;
-            border-radius: 50%;
+        .container-mensagem{
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
         }
+        .container-mensagem ul{
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .item-vacina{
+            display: flex;
+            background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+            color: white;
+            padding: 1rem;
+            border-radius: 10px ;
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.473);
+            gap: 1rem;  
+        }
+        .nome-vacina{
+            display: flex;
+            flex: 1 0 0;
+            color: white;
+            gap: 0.5rem;
+        }
+        .racao-atualizar-deletar{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        }
+
     </style>

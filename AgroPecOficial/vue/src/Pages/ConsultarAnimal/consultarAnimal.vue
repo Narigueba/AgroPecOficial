@@ -1,4 +1,6 @@
 <template>
-        <!-- Botão para consultar animal -->
-        <button @click="consultarTiposAnimaisPorId" class="btn consultar-btn">Consultar Animal</button>
+        <div class="router-link-back">
+                <RouterLink to="/animal"><i class="pi pi-angle-left back"></i></RouterLink>
+        </div>
+
 </template>

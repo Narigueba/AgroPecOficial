@@ -104,9 +104,10 @@ namespace AgroPec.Controllers
                 //command.Parameters.AddWithValue("@Preco", produto.Preco);
 
                 command.ExecuteScalar();
+
                 _context.CloseConnection();
 
-                return Ok( new { message = "Tipo de Animal inserido com sucesso!!!" });
+                return Ok(new { message = "Tipo de Animal inserido com sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -116,7 +117,7 @@ namespace AgroPec.Controllers
 
         [HttpPut]
         [Route("atualizarTipoAnimal")]
-        public async Task<IActionResult> Atualizar([FromBody] TipoAnimal tipoAnimal)
+        public async Task<IActionResult> Atualizar([FromQuery] int id, [FromBody] TipoAnimal tipoAnimal)
         {
             try
             {
@@ -124,14 +125,15 @@ namespace AgroPec.Controllers
 
                 var command = _context.CreateCommand();
                 command.CommandText = "UPDATE tipoanimal SET Animal = @Animal, Especie = @Especie WHERE IdTipoAnimal = @IdTipoAnimal";
-                command.Parameters.AddWithValue("@IdTipoAnimal", tipoAnimal.IdTipoAnimal);
+                command.Parameters.AddWithValue("@IdTipoAnimal", id);
                 command.Parameters.AddWithValue("@Animal", tipoAnimal.Animal);
                 command.Parameters.AddWithValue("@Especie", tipoAnimal.Especie);
 
                 command.ExecuteNonQuery();
+
                 _context.CloseConnection();
 
-                return Ok( new { message = "Tipo de animal atualizad0 com Sucesso!!!" });
+                return Ok(new { message = "Tipo de animal atualizad0 com Sucesso!!!" });
             }
             catch (Exception ex)
             {
@@ -140,7 +142,7 @@ namespace AgroPec.Controllers
         }
 
         [HttpDelete]
-        [Route("deletarAnimal")]
+        [Route("deletarTipoAnimal")]
         public async Task<IActionResult> Deletar([FromQuery] int id)
         {
             try
@@ -152,9 +154,10 @@ namespace AgroPec.Controllers
                 command.Parameters.AddWithValue("@IdTipoAnimal", id);
 
                 command.ExecuteNonQuery();
+
                 _context.CloseConnection();
 
-                return Ok( new { message = "Tipo de animal excluido com sucesso!!!" });
+                return Ok(new { message = "Tipo de animal excluido com sucesso!!!" });
             }
             catch (Exception ex)
             {

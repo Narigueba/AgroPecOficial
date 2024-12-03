@@ -115,7 +115,7 @@ namespace AgroPec.Controllers
 
         [HttpPut]
         [Route("atualizarVacina")]
-        public async Task<IActionResult> Atualizar([FromBody] Vacina vacina)
+        public async Task<IActionResult> Atualizar([FromQuery] int id, [FromBody] Vacina vacina)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace AgroPec.Controllers
 
                 var command = _context.CreateCommand();
                 command.CommandText = "UPDATE vacina SET TipoVacina = @TipoVacina WHERE IdVacina = @IdVacina";
-                command.Parameters.AddWithValue("@IdVacina", vacina.IdVacina);
+                command.Parameters.AddWithValue("@IdVacina", id);
                 command.Parameters.AddWithValue("@TipoVacina", vacina.TipoVacina);
 
                 command.ExecuteNonQuery();
@@ -145,7 +145,6 @@ namespace AgroPec.Controllers
             try
             {
                 _context.OpenConnection();
-
 
                 var command = _context.CreateCommand();
                 command.CommandText = "DELETE FROM vacina WHERE IdVacina = @IdVacina";
