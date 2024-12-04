@@ -35,7 +35,8 @@ onMounted(() => {
 
         <div v-if="racaoData"> 
             <h4>Detalhes da Ração:</h4> 
-            <pre>{{ racaoData.unidadeMedida }}</pre> 
+            <pre>{{ racaoData }}</pre> 
+            <pre>{{ racaoData.peso }}</pre>
         </div>
         
     </div>
