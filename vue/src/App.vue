@@ -11,6 +11,7 @@ import { RouterLink } from 'vue-router';
       <RouterLink to="/tipo-animal">Tipo do Animal</RouterLink>
       <RouterLink to="/vacina">Vacina</RouterLink>
       <RouterLink to="/animal">Animal</RouterLink>
+      <RouterLink to="/animal-vacina">Animal e Vacina</RouterLink>
     </nav>
     <main>
       <RouterView />
