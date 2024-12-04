@@ -118,9 +118,7 @@ const deletarAnimal = async () => {
 
 const selecionarTipoAnimal = async () => {
     try {
-        listaTipoAnimal.value = await api.getTipoAnimal(
-            "selecionarTipoAnimal"
-        );
+        listaTipoAnimal.value = await api.getTipoAnimal("selecionarTipoAnimal");
         console.log(listaTipoAnimal.value);
     } catch (error) {
         console.error(error);
@@ -138,8 +136,9 @@ const selecionarRacoes = async () => {
 };
 
 onMounted(() => {
-    selecionarRacoes();
-    selecionarTipoAnimal();
+    selecionarAnimais();
+    // selecionarRacoes();
+    // selecionarTipoAnimal();
 });
 </script>
 <template>
@@ -147,12 +146,96 @@ onMounted(() => {
             <div class="router-link-back">
                 <RouterLink to="/animal"><i class="pi pi-angle-left back"></i></RouterLink>
             </div>
-            <p>{{ mensagem }}</p>
-            <div>
-                {{ animalData }}
+            <div class="animal-container">
+                <ul>
+                    <li  v-for="animal in animalData" :key="animal.id" class="item-vacina">
+                        <img src="" alt="">
+                        <div class="animal-container-value">
+                                <div class="flex">
+                                    <p class="w-700">Nome: </p>
+                                    <p class="w-200">{{ animal.nomeAnimal }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Idade: </p>
+                                    <p class="w-200">{{ animal.idade }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Ninhada: </p>
+                                    <p class="w-200">{{ animal.ninhada }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Peso: </p>
+                                    <p class="w-200">{{ animal.peso }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Raça: </p>
+                                    <p class="w-200">{{ animal.raca }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Racao: </p>
+                                    <p class="w-200">{{ animal.racao.nomeRacao }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Animal: </p>
+                                    <p class="w-200">{{ animal.tipoAnimal.animal }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Especie: </p>
+                                    <p class="w-200">{{ animal.tipoAnimal.especie }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Data de Nascimento: </p>
+                                    <p class="w-200">{{ animal.dataNascimento }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Sexo: </p>
+                                    <p class="w-200">{{ animal.sexo }}</p>
+                                </div>
+                                <div class="flex">
+                                    <p  class="w-700">Cor: </p>
+                                    <p class="w-200">{{ animal.cor }}</p>
+                                </div>
+                                <div class="racao-atualizar-deletar">
+                                    <button @click="atualizarRacao" class="btn atualizar-btn">Atualizar</button>
+                                    <button @click="deletarRacao" class="btn deletar-btn">Deletar</button>
+                                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
 </template>
 <style scoped>
+    .flex{
+        display: flex;
+        gap: .5rem;
+    }
+    .animal-container ul{
+        padding: 0 5rem;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    .animal-container-value{
+        background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0 0 10px 10px ;
+    }
+    .racao-atualizar-deletar{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        margin-top: 2rem;
+    }
+
+    @media (min-width: 37.56rem) {
+        .animal-container-value{
+            padding: 2rem 2.5rem;
+
+        }
+    }
 
 </style>

@@ -26,7 +26,7 @@ namespace AgroPec.Controllers
                 _context.OpenConnection();
 
                 var command = _context.CreateCommand();
-                command.CommandText = $"SELECT IdRacao, NomeRacao, Peso, UnidadeMedida FROM Racao WHERE 1 = 1 AND Racao.IdRacao = {id}";
+                command.CommandText = $"SELECT IdRacao, NomeRacao, Peso, UnidadeMedida, imagem FROM Racao WHERE 1 = 1 AND Racao.IdRacao = {id}";
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -64,7 +64,7 @@ namespace AgroPec.Controllers
                 _context.OpenConnection();
 
                 var command = _context.CreateCommand();
-                command.CommandText = "SELECT IdRacao, NomeRacao, Peso, UnidadeMedida FROM Racao";
+                command.CommandText = "SELECT IdRacao, NomeRacao, Peso, UnidadeMedida, imagem FROM Racao";
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -76,6 +76,7 @@ namespace AgroPec.Controllers
                             NomeRacao = reader.GetString("NomeRacao"),
                             Peso = reader.GetDecimal("Peso"),
                             UnidadeMedida = reader.GetString("UnidadeMedida"),
+                            Imagem = reader.GetString("imagem")
                         });
                     }
                 }

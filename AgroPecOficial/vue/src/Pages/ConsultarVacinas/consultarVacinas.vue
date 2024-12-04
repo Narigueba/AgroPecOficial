@@ -1,7 +1,7 @@
 <script setup>
 import InputCustom from '../../components/InputCustom.vue';
 import { ref, onMounted } from 'vue';
-import ApiService from '../Vacina/ApiService';
+import ApiService from './ApiService';
 
 const api = new ApiService();
 const vacinaId = ref('');
@@ -109,7 +109,7 @@ onMounted(() => {
             gap: 5rem;
         }
         .container-mensagem ul{
-            padding: 0;
+            padding: 0 5rem;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;

@@ -2,8 +2,10 @@
 import InputCustom from '../../components/InputCustom.vue';
 import { ref, onMounted } from 'vue';
 import ApiService from '../Vacina/ApiService';
+import { useRoute } from 'vue-router';
 
 const api = new ApiService();
+const route = useRoute();
 const vacinaId = ref('');
 const vacinaData = ref(null);
 const novaVacina = ref({ tipoVacina: ''});
@@ -12,12 +14,13 @@ const listaTipoAnimal = ref();
 
 // Função para consultar racaos por ID
 const consultarVacinasPorId = async () => {
-    try {
-        vacinaData.value = await api.get(`consultarVacinasPorId?id=${vacinaId.value}`);
-    } catch (error) {
-        console.error(error);
-        mensagem.value = 'Erro ao consultar vacina por ID';
-    }
+console.log("vacinaId", vacinaId.value)
+    // try {
+    //     racaoData.value = await api.get(`consultarRacaoPorId?id=${racaoId.value}`);
+    // } catch (error) {
+    //     console.error(error);
+    //     mensagem.value = 'Erro ao consultar ração por ID';
+    // }
 };
 
 // const selecionarTipoAnimal = async () => {
@@ -105,6 +108,7 @@ const deletarVacina = async () => {
                     Botão para deletar uma racao
                     <button @click="deletarVacina">Deletar Vacina</button> -->
             </div>
+            <p>{{ mensagem }}</p>
         </div>
         <nav class="container-button">
           <RouterLink to="/" class="button-links"><i class="pi pi-home"></i></RouterLink>
@@ -113,6 +117,7 @@ const deletarVacina = async () => {
           <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
           <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
         </nav>
+        
     </div>
 
             <!-- <div>

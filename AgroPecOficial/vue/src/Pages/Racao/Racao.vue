@@ -2,9 +2,11 @@
 import InputCustom from '../../components/InputCustom.vue';
 import { ref, onMounted } from 'vue';
 import ApiService from './ApiService';
+import { useRoute } from 'vue-router';
 
 
 const api = new ApiService();
+const route = useRoute();
 const racaoId = ref('');
 const racaoData = ref(null);
 const novaRacao = ref({ nomeRacao: '', peso: 0, unidadeMedida: ''});
@@ -13,12 +15,13 @@ const listaTipoAnimal = ref();
 
 // Função para consultar racaos por ID
 const consultarRacaoPorId = async () => {
-    try {
-        racaoData.value = await api.get(`consultarRacaoPorId?id=${racaoId.value}`);
-    } catch (error) {
-        console.error(error);
-        mensagem.value = 'Erro ao consultar ração por ID';
-    }
+console.log("racaoId", racaoId.value)
+    // try {
+    //     racaoData.value = await api.get(`consultarRacaoPorId?id=${racaoId.value}`);
+    // } catch (error) {
+    //     console.error(error);
+    //     mensagem.value = 'Erro ao consultar ração por ID';
+    // }
 };
 
 // const selecionarTipoAnimal = async () => {
@@ -90,7 +93,8 @@ const deletarRacao = async () => {
                 <InputCustom v-model="racaoId" placeholder="Cod. da Ração" class="inserir-cod"/>
                 <div class="consultar-racao-flex">
                     <!-- passando id por parametro URL -->
-                    <RouterLink to="/consultarRacao" class="btn consultar-btn">Consultar Ração</RouterLink>
+                    <RouterLink :to="`/consultarRacao/${racaoId}`" class="btn consultar-btn">Consultar Ração</RouterLink>
+                    <!-- <button @click="consultarRacaoPorId">teste</button> -->
                     <RouterLink to="/consultarRacoes" class="btn selecionar-btn">Selecionar Rações</RouterLink>
                 </div>
             </div>
@@ -105,6 +109,7 @@ const deletarRacao = async () => {
                 <div class="inserir-racao-flex">
                     <button @click="inserirRacao" class="btn inserir-btn">Inserir Ração</button>
                 </div>
+                <p>{{ mensagem }}</p>
             </div>
         </div>
         <nav class="container-button">
@@ -113,7 +118,7 @@ const deletarRacao = async () => {
             <RouterLink to="/racao" class="button-links"><i class="pi pi-warehouse"></i></RouterLink>
             <RouterLink to="/vacina" class="button-links"><i class="pi pi-heart"></i></RouterLink>
             <RouterLink to="/configuracao" class="button-links"><i class="pi pi-cog"></i></RouterLink>
-        </nav>
+        </nav>  
     </div>
 </template>
 

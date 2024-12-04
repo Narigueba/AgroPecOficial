@@ -91,24 +91,29 @@ const deletarRacao = async () => {
                 <div class="dados-container">
                     <ul>
                         <li v-for="racao in racaoData" :key="racao.id" :class="{ importante: racao.peso > 5 }" class="item-racao">
-                            <img src="" alt="">
-                            <div class="dados-recebidos grow">
-                                <div class="dados-nome">
-                                    <p class="w-700">Nome:</p>
-                                    <p class="w-300">{{ racao.nomeRacao }}</p>
-                                </div>
-                                <div class="dados-peso">
-                                    <p class="w-700">Peso:</p>
-                                    <div class="dados-valor-peso">
-                                        <p class="w-300">{{ racao.peso }}</p>
-                                        <p class="racao-medida w-300">{{ racao.unidadeMedida }}</p>
+                            <div>
+                                <img :src="racao.imagem" alt="" class="img">
+                            </div>
+                            <div class=" container-dados-recebidos grow">
+                                <div class="dados-recebidos grow">
+                                    <div class="dados-nome">
+                                        <p class="w-700">Nome:</p>
+                                        <p class="w-300">{{ racao.nomeRacao }}</p>
+                                    </div>
+                                    <div class="dados-peso">
+                                        <p class="w-700">Peso:</p>
+                                        <div class="dados-valor-peso">
+                                            <p class="w-300">{{ racao.peso }}</p>
+                                            <p class="racao-medida w-300">{{ racao.unidadeMedida }}</p>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="racao-atualizar-deletar">
+                                    <button @click="atualizarRacao" class="btn atualizar-btn">Atualizar</button>
+                                    <button @click="deletarRacao" class="btn deletar-btn">Deletar</button>
+                                </div>
                             </div>
-                            <div class="racao-atualizar-deletar">
-                                <button @click="atualizarRacao" class="btn atualizar-btn">Atualizar</button>
-                                <button @click="deletarRacao" class="btn deletar-btn">Deletar</button>
-                            </div>
+
                         </li>
                     </ul>
                 </div>
@@ -123,13 +128,16 @@ const deletarRacao = async () => {
 </template>
 <style scoped>
 
+    .img{
+        max-width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+
     .dados-container{
         margin: 0 auto;
-        width: 80%;
-
 }
     ul{
-    padding: 0;
+    padding: 0 5rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -138,11 +146,18 @@ const deletarRacao = async () => {
     }
     .item-racao{
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 440px;
+    }
+    .container-dados-recebidos{
+        display: flex;
+        /* flex-direction: column; */
         background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
         color: white;
-        padding: 1rem;
-        border-radius: 10px ;
-        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.473);
+        width: 100%;
+        padding: 1rem 1.5rem;
+        border-radius: 0 0 10px 10px ;
         gap: 1rem;      
     }
     .grow{
@@ -168,6 +183,13 @@ const deletarRacao = async () => {
         display: flex;
         flex-direction: column;
         gap: .5rem;
+    }
+
+    @media (min-width: 37.56rem) {
+        .container-dados-recebidos{
+            padding: 2rem 2.5rem;
+            flex-direction: column;
+        }
     }
 
 

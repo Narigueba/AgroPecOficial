@@ -1,104 +1,48 @@
 <script setup>
-import InputCustom from '../../components/InputCustom.vue';
 import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import ApiService from './ApiService';
 
-
+const route = useRoute();
 const api = new ApiService();
-const racaoId = ref('');
 const racaoData = ref(null);
-const novaRacao = ref({ nomeRacao: '', peso: 0, unidadeMedida: ''});
 const mensagem = ref('');
-const listaTipoAnimal = ref(); 
 
-//buscar o id por parametro URL to="/consultarRacao/id"
-
-// Função para consultar racaos por ID
 const consultarRacaoPorId = async () => {
     try {
-        racaoData.value = await api.get(`consultarRacaoPorId?id=${racaoId.value}`);
+        const id = route.params.id; // Obtém o ID da URL
+        racaoData.value = await api.get(`consultarRacaoPorId?id=${id}`);
     } catch (error) {
         console.error(error);
         mensagem.value = 'Erro ao consultar ração por ID';
     }
 };
 
-// const selecionarTipoAnimal = async () => {
-//     try {
-//         listaTipoAnimal.value = await api.getTipoAnimal('selecionarTiposAnimais');
-//     } catch (error) {
-//         console.error(error);
-//         mensagem.value = 'Erro ao selecionar racao' + error.message;
-//     }
-// };
-
-// Função para selecionar todos as racoes
-const selecionarRacoes = async () => {
-    try {
-        racaoData.value = await api.get('selecionarRacoes');
-    } catch (error) {
-        console.error(error);
-        mensagem.value = 'Erro ao selecionar ração' + error.message;
-    }
-};
-
-// Função para inserir uma nova racao
-const inserirRacao = async () => {
-    try {
-        const resposta = await api.post('inserirRacao', novaRacao.value);
-        mensagem.value = 'Racao inserido com sucesso!';
-        console.log(resposta);
-    } catch (error) {
-        console.error(error);
-        mensagem.value = 'Erro ao inserir racao' + error.message;
-    }
-};
-
-// Função para atualizar uma racao existente
-const atualizarRacao = async () => {
-    try {
-        const resposta = await api.put('atualizarRacao',racaoId.value, novaRacao.value);
-        mensagem.value = 'Ração atualizada com sucesso!';
-        console.log(resposta);
-    } catch (error) {
-        console.error(error);
-        mensagem.value = 'Erro ao atualizar ração';
-    }
-};
-
-// Função para deletar uma racao
-const deletarRacao = async () => {
-    try {
-        const resposta = await api.delete(`deletarRacao?id=${racaoId.value}`);
-        mensagem.value = 'Ração deletada com sucesso!';
-        console.log(resposta);
-    } catch (error) {
-        console.error(error);
-        mensagem.value = 'Erro ao deletar ração';
-    }
-};
-
-
-// onMounted(() => {
-//     selecionarTipoAnimal();
-// });
+// Consulta automaticamente ao montar o componente
+onMounted(() => {
+    consultarRacaoPorId();
+});
 </script>
+
 <template>
     <div>
         <div class="router-link-back">
             <RouterLink to="/racao"><i class="pi pi-angle-left back"></i></RouterLink>  
-        </div>  
-        <!-- Exibição de mensagem -->
+        </div> 
+
         <p class="mensagem">{{ mensagem }}</p>
 
-        <!-- Exibição de dados da racao consultada -->
+
         <div v-if="racaoData"> 
-            <h4>Detalhes da Racao:</h4> 
-            <pre>{{ racaoData }}</pre> 
+            <h4>Detalhes da Ração:</h4> 
+            <pre>{{ racaoData.unidadeMedida }}</pre> 
         </div>
+        
     </div>
 </template>
-
 <style scoped>
+pre{
+    color: black;
+}
 
 </style>

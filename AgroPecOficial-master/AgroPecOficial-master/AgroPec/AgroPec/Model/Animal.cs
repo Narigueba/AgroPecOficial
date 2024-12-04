@@ -12,6 +12,7 @@
         public decimal Peso { get; set; }
         public string? Fotos { get; set; }
         public string Raca { get; set; }
+        public string? Imagem { get; set; }
 
         //chaves estrangeiras
 

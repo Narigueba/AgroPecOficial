@@ -1,6 +1,6 @@
 <template>
     <div class="container-flex">
-        <div class="container-config grow padding">
+        <div class="container-config grow config-padding padding">
             <RouterLink to="/usuario" class="btn-config consultar-btn row-container">
                 <div class="row-flex">
                     <i class="config-pi pi pi-user "></i>
@@ -72,7 +72,16 @@
     }
     .color-red{
         color: rgb(228, 26, 26);
-    }
+
+    }     @media (min-width: 48.75rem) {
+
+        .config-padding{
+          padding: 3rem 10% 3rem 20%;
+        }
+
+      }
+
+
     
 
 

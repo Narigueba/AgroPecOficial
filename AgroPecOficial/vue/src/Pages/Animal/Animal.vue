@@ -185,7 +185,7 @@ const selecionarRacoes = async () => {
                 <div class="inserir-animal-flex">
                     <button @click="inserirAnimais" class="btn inserir-cod-animal">Inserir Animal</button>
                 </div>
-                <!-- <p>{{ mensagem }}</p> -->
+                <p>{{ mensagem }}</p>
             </div>
         </div>
         <nav class="container-button">

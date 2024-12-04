@@ -25,28 +25,28 @@ namespace AgroPec.Controllers
                 _context.OpenConnection();
 
                 var command = _context.CreateCommand();
-                command.CommandText += "SELECT  ";
-                command.CommandText += " agropec.animal.IdAnimal,";
-                command.CommandText += " agropec.animal.NomeAnimal,";
-                command.CommandText += " agropec.animal.Idade,";
-                command.CommandText += " agropec.animal.IdTipoAnimal,";
-                command.CommandText += " agropec.animal.IdRacao,";
-                command.CommandText += " agropec.racao.NomeRacao,";
-                command.CommandText += " agropec.racao.Peso AS PesoRacao,";
-                command.CommandText += " agropec.racao.UnidadeMedida,";
-                command.CommandText += " agropec.animal.DataNascimento,";
-                command.CommandText += " agropec.animal.Sexo,";
-                command.CommandText += " agropec.animal.Cor,";
-                command.CommandText += " agropec.animal.Ninhada,";
-                command.CommandText += " agropec.animal.Peso AS PesoAnimal,";
-                command.CommandText += " agropec.animal.Raca,";
-                command.CommandText += " agropec.tipoanimal.animal,";
-                command.CommandText += " agropec.tipoanimal.Especie";
-                command.CommandText += " FROM agropec.animal";
-                command.CommandText += " JOIN agropec.tipoanimal";
-                command.CommandText += " ON agropec.tipoanimal.IdTipoAnimal = agropec.animal.IdTipoAnimal";
-                command.CommandText += " JOIN agropec.racao";
-                command.CommandText += " ON agropec.racao.IdRacao = agropec.animal.IdRacao";
+                command.CommandText += @"SELECT  
+                                         agropec.animal.IdAnimal,
+                                         agropec.animal.NomeAnimal,
+                                         agropec.animal.Idade,
+                                         agropec.animal.IdTipoAnimal,
+                                         agropec.animal.IdRacao,
+                                         agropec.racao.NomeRacao,
+                                         agropec.racao.Peso AS PesoRacao,
+                                         agropec.racao.UnidadeMedida,
+                                         agropec.animal.DataNascimento,
+                                         agropec.animal.Sexo,
+                                         agropec.animal.Cor,
+                                         agropec.animal.Ninhada,
+                                         agropec.animal.Peso AS PesoAnimal,
+                                         agropec.animal.Raca,
+                                         agropec.tipoanimal.animal,
+                                         agropec.tipoanimal.Especie
+                                         FROM agropec.animal
+                                         LEFT JOIN agropec.tipoanimal
+                                         ON agropec.tipoanimal.IdTipoAnimal = agropec.animal.IdTipoAnimal
+                                         LEFT JOIN agropec.racao
+                                         ON agropec.racao.IdRacao = agropec.animal.IdRacao ";
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -64,13 +64,14 @@ namespace AgroPec.Controllers
                             Peso = reader.GetDecimal("PesoAnimal"),
                             Raca = reader.GetString("Raca"),
 
-                            Racao = 
-                            { 
-                                IdRacao = reader.GetInt32("IdRacao"), 
-                                NomeRacao = reader.GetString("NomeRacao"),
-                                Peso = reader.GetDecimal("PesoRacao"),
-                                UnidadeMedida = reader.GetString("UnidadeMedida")
+                            Racao = reader.IsDBNull(reader.GetOrdinal("IdRacao")) ? null : new Racao
+                            {
+                                IdRacao = reader.GetInt32("IdRacao"),
+                                NomeRacao = reader.IsDBNull(reader.GetOrdinal("NomeRacao")) ? null : reader.GetString("NomeRacao"),
+                                Peso = reader.IsDBNull(reader.GetOrdinal("PesoRacao")) ? (decimal?)null : reader.GetDecimal("PesoRacao"),
+                                UnidadeMedida = reader.IsDBNull(reader.GetOrdinal("UnidadeMedida")) ? null : reader.GetString("UnidadeMedida")
                             },
+
 
                             TipoAnimal = 
                             {
