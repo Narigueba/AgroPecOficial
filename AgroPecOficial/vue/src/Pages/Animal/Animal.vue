@@ -2,10 +2,11 @@
 import InputCustom from "../../components/InputCustom.vue";
 import { ref, onMounted } from "vue";
 import ApiService from "./ApiService";
+import { useRoute } from 'vue-router';
 
 const api = new ApiService();
 const idAnimal = ref("");
-const animalData = ref([]);
+const animalData = ref(null);
 const novoAnimal = ref({
     nomeAnimal: "",
     idade: 0,
@@ -33,17 +34,14 @@ const selecionarAnimais = async () => {
     }
 };
 
-const consultarAnimaisPorId = async () => {
-    try {
-        animalData.value = [];
-        var animal = await api.get(
-            `consultarAnimaisPorId?id=${idAnimal.value}`
-        );
-        animalData.value.push(animal);
-    } catch (error) {
-        console.error(error);
-        mensagem.value = "Erro ao consultar animais por ID" + error.message;
-    }
+const consultarAnimalPorId = async () => {
+console.log("animalId", animalId.value)
+    // try {
+    //     racaoData.value = await api.get(`consultarRacaoPorId?id=${racaoId.value}`);
+    // } catch (error) {
+    //     console.error(error);
+    //     mensagem.value = 'Erro ao consultar ração por ID';
+    // }
 };
 
 const inserirAnimais = async () => {
@@ -150,7 +148,7 @@ const selecionarRacoes = async () => {
                 <h4 class="container-title">Consultar Animal</h4>
                 <InputCustom placeholder="Cod. do Animal" v-model="idAnimal" class="inserir-cod"/>
                 <div class="consultar-animal-flex">
-                    <RouterLink to="/consultarAnimal" class="btn consultar-btn">Consultar Animal</RouterLink>
+                    <RouterLink :to="`/consultarAnimal/${animalId}`" class="btn consultar-btn">Consultar Animal</RouterLink>
                     <RouterLink to="/consultarAnimais" class="btn selecionar-btn">Selecionar Animais</RouterLink>
                 </div>
             </div>

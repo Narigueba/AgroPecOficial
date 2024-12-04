@@ -32,7 +32,7 @@ const routes = [
   { path: '/consultarVacina/:id', props: true, component: ConsultarVacina },
   { path: '/TipoAnimal', component: TipoAnimal },
   { path: '/Animal', component: Animal },
-  { path: '/consultarAnimal', component: ConsultarAnimal },
+  { path: '/consultarAnimal/:id', props: true, component: ConsultarAnimal },
   { path: '/consultarAnimais', component: ConsultarAnimais },
   { path: '/usuario', component: Usuario },
   { path: '/favoritos', component: Favoritos },

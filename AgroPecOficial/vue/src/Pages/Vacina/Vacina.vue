@@ -92,7 +92,7 @@ const deletarVacina = async () => {
                 <!-- Input para consultar racao por ID -->
                 <InputCustom  placeholder="Cod. da Vacina" v-model="vacinaId" class="inserir-cod"/>
                 <div class="consultar-vacina-flex">
-                    <RouterLink to="/consultarVacina" class="btn consultar-btn">Consultar Vacina</RouterLink>
+                    <RouterLink :to="`/consultarVacina/${vacinaId}`" class="btn consultar-btn">Consultar Vacina</RouterLink>
                     <RouterLink to="/consultarVacinas" class="btn selecionar-btn">Selecionar Vacinas</RouterLink>
                 </div>
             </div>
